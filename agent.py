@@ -1,17 +1,35 @@
 import os
 import json
+import requests
 from dotenv import load_dotenv
 
-# Load environment variables
 load_dotenv()
 
-import google.generativeai as genai
+GEMINI_API_KEY = os.getenv("GOOGLE_API_KEY")
 
-# Configure Gemini
-genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
+API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent"
 
-# FIXED MODEL NAME
-model = genai.GenerativeModel("models/gemini-1.5-flash-latest")
+def call_gemini(prompt):
+    headers = {
+        "Content-Type": "application/json"
+    }
+    params = {
+        "key": GEMINI_API_KEY
+    }
+    data = {
+        "contents": [
+            {
+                "parts": [
+                    {"text": prompt}
+                ]
+            }
+        ]
+    }
+
+    response = requests.post(API_URL, headers=headers, params=params, json=data)
+    response.raise_for_status()
+    return response.json()["candidates"][0]["content"]["parts"][0]["text"]
+
 
 # ------------------------
 # Simple JSON-based storage
