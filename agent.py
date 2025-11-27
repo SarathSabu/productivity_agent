@@ -6,24 +6,13 @@ from dotenv import load_dotenv
 load_dotenv()
 
 GEMINI_API_KEY = os.getenv("GOOGLE_API_KEY")
-
 API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent"
 
 def call_gemini(prompt):
-    headers = {
-        "Content-Type": "application/json"
-    }
-    params = {
-        "key": GEMINI_API_KEY
-    }
+    headers = {"Content-Type": "application/json"}
+    params = {"key": GEMINI_API_KEY}
     data = {
-        "contents": [
-            {
-                "parts": [
-                    {"text": prompt}
-                ]
-            }
-        ]
+        "contents": [{"parts": [{"text": prompt}]}]
     }
 
     response = requests.post(API_URL, headers=headers, params=params, json=data)
@@ -124,5 +113,4 @@ def ai_agent(user_input):
     User message: {user_input}
     """
 
-   return call_gemini(prompt)
-
+    return call_gemini(prompt)
