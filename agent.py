@@ -124,6 +124,5 @@ def ai_agent(user_input):
     User message: {user_input}
     """
 
-    # Generate Gemini response
-    response = model.generate_content(prompt)
-    return response.text
+   return call_gemini(prompt)
+
