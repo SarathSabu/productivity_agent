@@ -9,8 +9,9 @@ import google.generativeai as genai
 
 # Configure Gemini
 genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
-model = genai.GenerativeModel("gemini-1.5-flash-latest")
 
+# FIXED MODEL NAME
+model = genai.GenerativeModel("models/gemini-1.5-flash-latest")
 
 # ------------------------
 # Simple JSON-based storage
@@ -27,7 +28,6 @@ def load_tasks():
 def save_tasks(tasks):
     with open(TASK_FILE, "w") as f:
         json.dump(tasks, f, indent=2)
-
 
 # ------------------------
 # Tools (Agent Actions)
@@ -57,7 +57,6 @@ def list_tasks():
         result += f"{t['id']}. {t['task']} — {t['status']}\n"
     return result
 
-
 # ------------------------
 # Intent Classifier
 # ------------------------
@@ -72,7 +71,6 @@ def classify_intent(message):
         return "list_tasks"
 
     return "chat"
-
 
 # ------------------------
 # Main Gemini Agent
