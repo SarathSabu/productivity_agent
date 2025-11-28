@@ -10,7 +10,7 @@ load_dotenv()
 GEMINI_API_KEY = os.getenv("GOOGLE_API_KEY")
 
 # Correct REST endpoint (2025)
-API_URL = "https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent"
+API_URL = "https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash-live:generateContent"
 
 
 # ------------------------
